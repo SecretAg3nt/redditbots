@@ -37,6 +37,6 @@ while True:
                         print(create_message(NUMCOMMENTS, key, comment))
                         subject = "Someone is talking about " + key
                         r.send_message(USERNAME, subject, create_message(NUMCOMMENTS, key, comment))
-                        print("Message sent to " + USERNAME)
+                        print(strftime("%Y-%m-%d %H:%M:%S") + "Message sent to " + USERNAME)
     except:
         pass
