@@ -17,9 +17,10 @@ subDone = set()
 def create_message(NUMCOMMENTS, key, comment):
     return str(NUMCOMMENTS) + ") " + strftime("%Y-%m-%d %H:%M:%S") + " Someone is talking about \"" + key + "\": " + comment.author.name + " " + comment.permalink
 
-print(strftime("%Y-%m-%d %H:%M:%S") + " Searching for: " + str(SETPHRASES))
+
 r = obot.login()
 print("Logged in")
+print(strftime("%Y-%m-%d %H:%M:%S") + " Searching for: " + str(SETPHRASES))
 
 while True:
     try:
@@ -36,7 +37,7 @@ while True:
                         subject = "Someone is talking about " + key
                         r.send_message(USERNAME, subject, create_message(NUMCOMMENTS, key, comment))
                         print("Message Sent to " + USERNAME)
-                        if comment.submission.id not in subDone:
+                        if comment.submission.id not in subDone and comment.subreddit.display_name != "nba":
                             comment.reply(COMMREPLY)
                             print("Replied to comment")
                             subDone.add(comment.submission.id)
