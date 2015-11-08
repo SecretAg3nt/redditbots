@@ -7,6 +7,7 @@ NUMCOMMENTS = 0
 SETPHRASES = ["pelican", "pelicans"]
 COMMLIMIT = 100
 COMMREPLY = "Don't fuck with [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
+USERNAME = "SecretAg3nt"
 
 commDone = set()
 subDone = set()
@@ -19,6 +20,7 @@ def create_message(NUMCOMMENTS, key, comment):
 print(strftime("%Y-%m-%d %H:%M:%S") + " Searching for: " + str(SETPHRASES))
 r = obot.login()
 print("Logged in")
+
 while True:
     try:
         for comment in praw.helpers.comment_stream(r, 'all', limit=COMMLIMIT, verbosity=0):
@@ -32,8 +34,8 @@ while True:
                         NUMCOMMENTS = NUMCOMMENTS + 1
                         print(create_message(NUMCOMMENTS, key, comment))
                         subject = "Someone is talking about " + key
-                        r.send_message('SecretAg3nt', subject, create_message(NUMCOMMENTS, key, comment))
-                        print("Message Sent")
+                        r.send_message(USERNAME, subject, create_message(NUMCOMMENTS, key, comment))
+                        print("Message Sent to " + USERNAME)
                         if comment.submission.id not in subDone:
                             comment.reply(COMMREPLY)
                             print("Replied to comment")
