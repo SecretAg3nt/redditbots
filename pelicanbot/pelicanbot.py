@@ -1,16 +1,22 @@
 import praw
-from time import strftime
 import obot
+from time import strftime
 
+
+NUMCOMMENTS = 0
+SETPHRASES = ["pelican", "pelicans"]
+COMMLIMIT = 100
+COMMREPLY = "Don't fuck with [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
 
 commDone = set()
 subDone = set()
-NUMCOMMENTS = 0
-SETPHRASES = ["pelican"]
-COMMLIMIT = 100
 
-print(strftime("%Y-%m-%d %H:%M:%S"))
 
+# Creates msg from keyword and comment passed in
+def create_message(NUMCOMMENTS, key, comment):
+    return str(NUMCOMMENTS) + ") " + strftime("%Y-%m-%d %H:%M:%S") + " Someone is talking about \"" + key + "\": " + comment.author.name + " " + comment.permalink
+
+print(strftime("%Y-%m-%d %H:%M:%S") + " Searching for: " + str(SETPHRASES))
 r = obot.login()
 print("Logged in")
 while True:
@@ -24,13 +30,12 @@ while True:
                 for key in SETPHRASES:
                     if word == key:
                         NUMCOMMENTS = NUMCOMMENTS + 1
-                        msg = str(NUMCOMMENTS) + ") *" + strftime("%Y-%m-%d %H:%M:%S") + "* Someone is talking about \"" + key + "\": " + comment.author.name + " " + comment.permalink
-                        print(msg)
-                        subject = "Someone is talking about \"" + key
-                        r.send_message('SecretAg3nt', subject, msg)
+                        print(create_message(NUMCOMMENTS, key, comment))
+                        subject = "Someone is talking about " + key
+                        r.send_message('SecretAg3nt', subject, create_message(NUMCOMMENTS, key, comment))
                         print("Message Sent")
                         if comment.submission.id not in subDone:
-                            comment.reply("Don't fuck with [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)")
+                            comment.reply(COMMREPLY)
                             print("Replied to comment")
                             subDone.add(comment.submission.id)
 
