@@ -31,13 +31,13 @@ while True:
             commDone.add(comment.id)
             for word in cwords:
                 for key in SETPHRASES:
-                    if word == key:
+                    if word == key and comment.subreddit.display_name != "nba":
                         NUMCOMMENTS = NUMCOMMENTS + 1
                         print(create_message(NUMCOMMENTS, key, comment))
                         subject = "Someone is talking about " + key
                         r.send_message(USERNAME, subject, create_message(NUMCOMMENTS, key, comment))
                         print("Message Sent to " + USERNAME)
-                        if comment.submission.id not in subDone and comment.subreddit.display_name != "nba":
+                        if comment.submission.id not in subDone:
                             comment.reply(COMMREPLY)
                             print("Replied to comment")
                             subDone.add(comment.submission.id)
