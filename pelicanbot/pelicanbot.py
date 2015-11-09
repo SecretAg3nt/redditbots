@@ -6,7 +6,7 @@ from time import strftime
 NUMCOMMENTS = 0
 SETPHRASES = ["pelican", "pelicans"]
 COMMLIMIT = 100
-COMMREPLY = "Don't fuck with [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
+COMMREPLY = "Don't fuck with the [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
 USERNAME = "SecretAg3nt"
 
 commDone = set()
