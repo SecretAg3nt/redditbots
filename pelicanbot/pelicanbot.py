@@ -12,11 +12,11 @@ USERNAME = "SecretAg3nt"
 
 # Creates msg from keyword and comment passed in
 def create_message(comment):
-    return "PelicanBot found someone talking about pelicans! " + comment.author.name + " " + comment.permalink + "\n"
+    return "PelicanBot found someone talking about pelicans! " + comment.author.name + " " + comment.permalink
 
 
 def send_update(key, comment, USERNAME):
-    print(create_message(comment))
+    print(create_message(comment) + "\n")
     subject = "Someone is talking about " + key + "!"
     r.send_message(USERNAME, subject, create_message(key, comment))
     print("Message Sent to " + USERNAME)
