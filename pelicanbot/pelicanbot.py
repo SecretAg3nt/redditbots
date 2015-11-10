@@ -38,7 +38,7 @@ while True:
                 for word in comment.body.lower().split():
                     for key in SETPHRASES:
                         if word == key:
-                            NUMCOMMENTS += NUMCOMMENTS
+                            NUMCOMMENTS += 1
                             send_update(NUMCOMMENTS, key, comment, USERNAME)
                             if comment.submission.id not in subDone and comment.subreddit.display_name not in SUBBLACKLIST:
                                 comment.reply(COMMREPLY)
