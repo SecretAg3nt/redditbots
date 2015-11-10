@@ -42,9 +42,9 @@ while True:
                                     print("Replied to comment")
                                     subDone.add(comment.submission.id)
                                 else:
-                                    print("Reply not sent, submission already replied to. " + comment.permalink)
+                                    print("Reply not sent, submission already replied to. " + comment.permalink + "\n")
                             else:
-                                print("Reply not sent, subreddit black-listed. " + comment.permalink)
+                                print("Reply not sent, subreddit black-listed. " + comment.permalink + "\n")
                                 subDone.add(comment.submission.id)
 
     except:
