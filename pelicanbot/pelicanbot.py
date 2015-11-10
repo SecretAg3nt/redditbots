@@ -12,7 +12,7 @@ USERNAME = "SecretAg3nt"
 
 # Creates msg from keyword and comment passed in
 def create_message(comment):
-    return "PelicanBot found someone talking about pelicans! " + comment.author.name + " " + comment.permalink
+    return "PelicanBot found someone talking about pelicans! " + comment.author.name + " " + comment.permalink + "\n"
 
 
 def send_update(key, comment, USERNAME):
@@ -35,16 +35,16 @@ while True:
                 for word in comment.body.lower().split():
                     for key in KEYPHRASES:
                         if word == key:
-                            send_update(key, comment, USERNAME)
                             if comment.subreddit.display_name not in SUBBLACKLIST:
                                 if comment.submission.id not in subDone:
                                     comment.reply(COMMREPLY)
+                                    send_update(key, comment, USERNAME)
                                     print("Replied to comment")
                                     subDone.add(comment.submission.id)
                                 else:
-                                    print("Reply not sent, submission already replied to.")
+                                    print("Reply not sent, submission already replied to. " + comment.permalink)
                             else:
-                                print("Reply not sent, subreddit black-listed.")
+                                print("Reply not sent, subreddit black-listed. " + comment.permalink)
                                 subDone.add(comment.submission.id)
 
     except:
