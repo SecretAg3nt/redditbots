@@ -49,6 +49,10 @@ def run():
                                 else:
                                     print("Reply not sent, subreddit black-listed. " + comment.permalink + "\n")
                                     subDone.add(comment.submission.id)
+                                    break
+                        else:
+                            continue
+                        break
 
         except:
             pass
