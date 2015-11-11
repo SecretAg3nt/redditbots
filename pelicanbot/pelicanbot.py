@@ -51,7 +51,7 @@ def run():
                                         subDone.add(comment.submission.id)
 
                                     else:
-                                        print("Reply not sent, submission already replied to. " + comment.permalink + "\n")
+                                        print("Reply not sent, submission already replied to. " + "\n")
                                 else:
                                     print("Reply not sent, subreddit black-listed. " + comment.subreddit.display_name + "\n")
                                     subDone.add(comment.submission.id)
