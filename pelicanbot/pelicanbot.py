@@ -37,25 +37,16 @@ def run():
     while True:
        # try:
             for comment in praw.helpers.comment_stream(r, 'all', limit=COMMLIMIT, verbosity=0):
-                if comment.id not in commDone:
+                if comment.id not in commDone and comment.submission.id not in subDone:
                     commDone.add(comment.id)
-                    for word in comment.body.lower().split():
-                        for key in KEYPHRASES:
-                            if word == key:
-                                if comment.subreddit.display_name not in SUBBLACKLIST:
-                                    if comment.submission.id not in subDone:
-                                        NUMCOMMENT += 1
-                                        comment.reply(COMMREPLY)
-                                        send_update(r, key, comment, USERNAME, NUMCOMMENT)
-                                        subDone.add(comment.submission.id)
-
-                                    else:
-                                        print("Reply not sent, submission already replied to. " + comment.permalink + "\n")
-                                else:
-                                    print("Reply not sent, subreddit black-listed. " + comment.subreddit.display_name + "\n")
+                    if comment.subreddit.display_name not in SUBBLACKLIST and comment.submission.id not in subDone:
+                        for word in comment.body.lower().split():
+                            for key in KEYPHRASES:
+                                if word == key:
+                                    NUMCOMMENT += 1
+                                    comment.reply(COMMREPLY)
+                                    send_update(r, key, comment, USERNAME, NUMCOMMENT)
                                     subDone.add(comment.submission.id)
-
-
       #  except:
            # pass
 
