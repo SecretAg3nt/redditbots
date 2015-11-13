@@ -4,19 +4,8 @@ from time import strftime
 import os
 
 
-# Creates msg from keyword and comment passed in
-def create_message(comment):
-    return "PelicanBot found someone talking about pelicans! " + comment.author.name + " " + comment.permalink
-
-
 def terminal_prompt(comment, NUMCOMMENT):
-    return str(NUMCOMMENT) + ") " + comment.author.name + " - r/" + comment.subreddit.display_name + "\n"
-
-
-def send_update(r, key, comment, USERNAME, NUMCOMMENT):
-    print(terminal_prompt(comment, NUMCOMMENT))
-    subject = "Someone is talking about " + key + "!"
-    r.send_message(USERNAME, subject, create_message(comment))
+    print(str(NUMCOMMENT) + ") " + comment.author.name + " - r/" + comment.subreddit.display_name + "\n")
 
 
 def run():
@@ -25,7 +14,6 @@ def run():
     SUBBLACKLIST = ["nba"]
     COMMLIMIT = 100
     COMMREPLY = "Don't fuck with the [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
-    USERNAME = "SecretAg3nt"
     NUMCOMMENT = 0
 
     commDone = set()
@@ -47,9 +35,8 @@ def run():
                                     if comment.submission.id not in subDone:
                                         NUMCOMMENT += 1
                                         comment.reply(COMMREPLY)
-                                        send_update(r, key, comment, USERNAME, NUMCOMMENT)
                                         subDone.add(comment.submission.id)
-
+                                        terminal_prompt(comment, NUMCOMMENT)
                                     else:
                                         print("Reply not sent, submission already replied to. " + "\n")
                                 else:
