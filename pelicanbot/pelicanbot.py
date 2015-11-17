@@ -8,7 +8,7 @@ class pelicanBot(object):
 
     def __init__(self):
         self.KEYPHRASES = ["pelican", "pelicans"]
-        self.SUBBLACKLIST = ["nba", "photography", "BloodGultchRP"]
+        self.SUBBLACKLIST = ["nba", "photography", "BloodGultchRP", "NOLAPelicans", "Mavericks", "guns"]
         self.COMMLIMIT = 100
         self.COMMREPLY = "Don't fuck with the [pelicans](https://www.youtube.com/watch?v=jWxIOdt-V8Y)"
         self.NUMCOMMENT = 0
